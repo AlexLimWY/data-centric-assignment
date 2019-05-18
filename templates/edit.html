@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+
+
+{%block title%}Edit Recipe{%endblock%}
+
+{% block maincontent %}
+    <form method='POST'>
+        <div>
+            <label>Recipe:</label>
+            <input type='text' name='recipe' value='{{recipe.recipe_name}}' required></input>
+        </div>
+        <div>
+            <label>Description:</label>
+            <textarea name='description' required>{{recipe.description}}</textarea>
+        </div>
+        <div>
+            <label>Main Ingredient:</label>
+            <select name='ingredient'>
+                {%for i in all_ingredients %}
+                <option value='{{i.ingredient_id}}'>{{i.ingredient_name}}</option>
+                {%endfor%}
+            </select>
+        </div>
+        <div>
+            <label>Allergen:</label>
+            <select name='allergen'>
+                {%for a in all_allergens %}
+                <option value='{{a.allergen_id}}'>{{a.allergen_name}}</option>
+                {%endfor%}
+            </select>
+        </div>
+        <div>
+            <label>Cuisine</label>
+            <select name='cuisine'>
+                {%for c in all_cuisines %}
+                <option value='{{c.cuisine_id}}'>{{c.cuisine_name}}</option>
+                {%endfor%}
+            </select>
+        </div>
+        <div>
+            <label>Instructions:</label>
+            <textarea name='instructions' required>{{recipe.cooking_instructions}}</textarea>
+        </div>
+        <div>
+            <label>Author's Name:</label>
+            <input type='text' name='author' value='{{author.author_name}}' required></input>
+        </div>
+        <div>
+            <label>Author's Country of Origin:</label>
+            <select name='country'>
+                {%for co in all_countries %}
+                <option value='{{co.author_country_of_origin_id}}'>{{co.author_country_of_origin_name}}</option>
+                {%endfor%}
+            </select>
+        </div>
+        <input type='submit'>
+    </form>
+{% endblock %}	

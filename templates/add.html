@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+{% set active_page = "add" %}
+
+
+{%block title%}Add Recipe{%endblock%}
+
+{% block maincontent %}
+    <form method='POST'>
+        <div>
+            <label>Recipe:</label>
+            <input type='text' name='recipe' required></input>
+        </div>
+        <div>
+            <label>Description:</label>
+            <textarea name='description' required></textarea>
+        </div>
+        <div>
+            <label>Main Ingredient:</label>
+            <select name='ingredient'>
+                {%for i in all_ingredients %}
+                <option value='{{i.ingredient_id}}'>{{i.ingredient_name}}</option>
+                {%endfor%}
+            </select>
+        </div>
+        <div>
+            <label>Allergen:</label>
+            <select name='allergen'>
+                {%for a in all_allergens %}
+                <option value='{{a.allergen_id}}'>{{a.allergen_name}}</option>
+                {%endfor%}
+            </select>
+        </div>
+        <div>
+            <label>Cuisine</label>
+            <select name='cuisine'>
+                {%for c in all_cuisines %}
+                <option value='{{c.cuisine_id}}'>{{c.cuisine_name}}</option>
+                {%endfor%}
+            </select>
+        </div>
+        <div>
+            <label>Instructions:</label>
+            <textarea name='instructions' required></textarea>
+        </div>
+        <div>
+            <label>Author's Name:</label>
+            <input type='text' name='author' required></input>
+        </div>
+        <div>
+            <label>Author's Country of Origin:</label>
+            <select name='country'>
+                {%for co in all_countries %}
+                <option value='{{co.author_country_of_origin_id}}'>{{co.author_country_of_origin_name}}</option>
+                {%endfor%}
+            </select>
+        </div>
+        <input type='submit'>
+    </form>
+{% endblock %}	
