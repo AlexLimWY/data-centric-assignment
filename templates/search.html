@@ -1,0 +1,110 @@
+{% extends 'layout.html' %}
+{% set active_page = "search" %}
+
+{%block title%}Search for Recipe{%endblock%}
+
+{% block maincontent %}
+    <div class='container'>
+        <form method='GET' class='form  mb-2'>
+            <div class='form-group'>
+                <h1><label>Search for Recipe</label></h1>
+                <input type='text' class='form-control' name='search' />
+            </div>
+            <input type='submit' value='Search' class='btn btn-primary'/>
+        </form>
+        <table class='table'>
+            <tr>
+                <th>
+                    Recipe Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Cuisine
+                </th>
+                <th>
+                    Main Ingredient
+                </th>
+                <th>
+                    Recipe
+                </th>
+            </tr>
+            {% for r in recipes %}
+            <tr>
+                <td>
+                    {{ r['recipe_name'] }}
+                </td>
+                <td>
+                    {{ r['description'] }}
+                </td>
+                <td>
+                    <img class="mx-auto card-img-top" src="static/{{r.image}}" alt="Card image cap" style="width:250px;height:250px;">
+                </td>
+                <td>
+                    {{ r['cuisine_name'] }}
+                </td>
+                <td>
+                    {{ r['ingredient_name'] }}
+                </td>
+                <td>
+                    <!-- Button to Open the Modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#re-{{r.recipe_id}}">
+                    Show Recipe
+                    </button>
+                    
+                    <!-- The Modal -->
+                      <div class="modal" id="re-{{r.recipe_id}}">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+            
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">{{r.recipe_name}}</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+            
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                              <p>
+                                <strong>Description: </strong>{{r.description|safe}}
+                              </p>
+                              <p>
+                                <strong>Main Ingredient: </strong>{{r.ingredient_name|safe}}
+                              </p>
+                              <p>
+                                <strong>Allergen: </strong>{{r.allergen_name|safe}}
+                              </p>
+                              <p>
+                                <strong>Cuisine: </strong>{{r.cuisine_name|safe}}
+                              </p>
+                              <br>
+                              <h5>Cooking Instructions: </h5>
+                              <p>
+                                {{r.cooking_instructions|safe}}
+                              </p>
+                              <p>
+                                <strong>Author's Name: </strong>{{r.author_name|safe}}
+                              </p>
+                              <p>
+                                <strong>Author's Country of Origin: </strong>{{r.author_country_of_origin_name|safe}}
+                              </p>
+                            </div>
+            
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+            
+                          </div>
+                        </div>
+                      </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}	    

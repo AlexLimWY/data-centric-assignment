@@ -172,6 +172,41 @@ def delete(recipe_id):
     cursor.close();
     return redirect('/')
     
+@app.route('/search')
+def search():
+    if 'search' not in request.args:
+        sql = """
+        SELECT Recipe.recipe_id, Recipe.recipe_name, Recipe.description, Recipe.cooking_instructions, Cuisine.cuisine_name, Recipe.image, Author.author_name, Author_country_of_origin.author_country_of_origin_name,
+        Ingredient.ingredient_name, Allergen.allergen_name
+        FROM  `Recipe`
+        JOIN Cuisine ON Recipe.cuisine_id = Cuisine.cuisine_id
+        JOIN Author ON Recipe.author_id = Author.author_id
+        JOIN Author_country_of_origin ON Author.author_country_of_origin_id = Author_country_of_origin.author_country_of_origin_id
+        JOIN Recipe_ingredient ON Recipe.recipe_id = Recipe_ingredient.recipe_id
+        JOIN Ingredient ON Recipe_ingredient.ingredient_id = Ingredient.ingredient_id
+        JOIN Recipe_allergen ON Recipe.recipe_id = Recipe_allergen.recipe_id
+        JOIN Allergen ON Recipe_allergen.allergen_id = Allergen.allergen_id
+        """
+    else:
+        search_for = request.args['search']
+        sql = """
+        SELECT Recipe.recipe_id, Recipe.recipe_name, Recipe.description, Recipe.cooking_instructions, Cuisine.cuisine_name, Recipe.image, Author.author_name, Author_country_of_origin.author_country_of_origin_name,
+        Ingredient.ingredient_name, Allergen.allergen_name
+        FROM  `Recipe`
+        JOIN Cuisine ON Recipe.cuisine_id = Cuisine.cuisine_id
+        JOIN Author ON Recipe.author_id = Author.author_id
+        JOIN Author_country_of_origin ON Author.author_country_of_origin_id = Author_country_of_origin.author_country_of_origin_id
+        JOIN Recipe_ingredient ON Recipe.recipe_id = Recipe_ingredient.recipe_id
+        JOIN Ingredient ON Recipe_ingredient.ingredient_id = Ingredient.ingredient_id
+        JOIN Recipe_allergen ON Recipe.recipe_id = Recipe_allergen.recipe_id
+        JOIN Allergen ON Recipe_allergen.allergen_id = Allergen.allergen_id
+        WHERE Recipe.recipe_name LIKE '%""" + search_for + "%'"
+
+    cursor = pymysql.cursors.DictCursor(conn)
+    cursor.execute(sql)
+    recipes = cursor.fetchall()
+    return render_template('search.html', recipes=recipes)    
+    
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
