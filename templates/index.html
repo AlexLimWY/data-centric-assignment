@@ -16,19 +16,19 @@
   <div class="mx-auto">{{each_recipe.cuisine_name}} Cuisine</div>
   <br>
   
-            <!-- Button to Open the Modal -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#r-{{each_recipe.recipe_id}}">
-          Show Recipe
-          </button>
-          <br>
+  <!-- Button to Open the Modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#r-{{each_recipe.recipe_id}}">
+  Show Recipe
+  </button>
+  <br>
     <section class='container-fluid'>
     <div class='row'>
       <div class="col-sm-10"></div>
       <div class="col-sm-1"><a href="/edit/{{each_recipe.recipe_id}}"><button>Edit</button></a></div>
       <div class="col-sm-1"><a href="/delete/{{each_recipe.recipe_id}}"><button>Delete</button></a></div>
     </div>
-  </section>        
-  <br>
+    </section>        
+    <br>
           <!-- The Modal -->
           <div class="modal" id="r-{{each_recipe.recipe_id}}">
             <div class="modal-dialog">

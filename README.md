@@ -8,8 +8,8 @@ https://www.foodsafety.gov/poisoning/causes/allergens/index.html
 
 ## Recipe
 - Chinese Roast Chicken and its image: https://rasamalaysia.com/chinese-roast-chicken/
-- Onion Scallion Beef: https://rasamalaysia.com/onion-scallion-beef/
-- Braised Pork Belly in Soy Sauce (Tau Yew Bak): https://rasamalaysia.com/braised-pork-belly-in-soy-sauce-tau-yew-bak/
+- Onion Scallion Beef and its image: https://rasamalaysia.com/onion-scallion-beef/
+- Braised Pork Belly in Soy Sauce (Tau Yew Bak) and its image: https://rasamalaysia.com/braised-pork-belly-in-soy-sauce-tau-yew-bak/
 - Sweet, sour, & spicy Korean fried chicken: https://www.maangchi.com/recipe/yangnyeom-tongdak
 - Braised beef short ribs: https://www.maangchi.com/recipe/makgalbijjim
 - Dumplings: https://www.maangchi.com/recipe/mandu
