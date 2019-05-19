@@ -105,12 +105,12 @@ def edit(recipe_id):
         cursor.execute('SELECT * from Cuisine')
         Cuisines = cursor.fetchall()
         
-        cursor.execute('SELECT * from Author')
-        Authors = cursor.fetchall()
+        cursor.execute("SELECT * from Author JOIN Recipe ON Author.author_id = Recipe.author_id WHERE Recipe.recipe_id = " + recipe_id)
+        author = cursor.fetchone()
         
         cursor.execute("SELECT * FROM Recipe WHERE recipe_id = " + recipe_id)
         recipe = cursor.fetchone()
-        return render_template('edit.html', recipe=recipe, all_ingredients=Ingredients, all_allergens=Allergens, all_countries = Countries, all_cuisines = Cuisines, all_authors=Authors)    
+        return render_template('edit.html', recipe=recipe, all_ingredients=Ingredients, all_allergens=Allergens, all_countries = Countries, all_cuisines = Cuisines, author = author)    
     
     else:
         recipe_name = request.form['recipe']
