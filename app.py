@@ -66,8 +66,8 @@ def add():
         cursor.execute(sql, values)
         new_author_id = cursor.lastrowid
         
-        sql = "INSERT INTO Recipe (cuisine_id, recipe_name, description, cooking_instructions, views, upvotes, image) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        values = (cuisine_id, recipe_name, description, cooking_instructions,'','','')
+        sql = "INSERT INTO Recipe (cuisine_id, recipe_name, description, cooking_instructions, image, author_id) VALUES (%s, %s, %s, %s, %s, %s)"
+        values = (cuisine_id, recipe_name, description, cooking_instructions,'', new_author_id)
         cursor.execute(sql, values)
         new_recipe_id = cursor.lastrowid
         
@@ -85,13 +85,6 @@ def add():
         values = (new_recipe_id, allergen_id)
         cursor.execute(sql, values)
 
-        sql = """
-            INSERT INTO Recipe_author (recipe_author_id, recipe_id, author_id)
-            VALUES (null, %s, %s)
-        """
-        values = (new_recipe_id, new_author_id)
-        cursor.execute(sql, values)
-        
         conn.commit()
         cursor.close();
         return redirect('/')        
@@ -113,11 +106,11 @@ def edit(recipe_id):
         Cuisines = cursor.fetchall()
         
         cursor.execute('SELECT * from Author')
-        author = cursor.fetchone()
+        Authors = cursor.fetchall()
         
         cursor.execute("SELECT * FROM Recipe WHERE recipe_id = " + recipe_id)
         recipe = cursor.fetchone()
-        return render_template('edit.html', author=author, recipe=recipe, all_ingredients=Ingredients, all_allergens=Allergens, all_countries = Countries, all_cuisines = Cuisines)    
+        return render_template('edit.html', recipe=recipe, all_ingredients=Ingredients, all_allergens=Allergens, all_countries = Countries, all_cuisines = Cuisines, all_authors=Authors)    
     
     else:
         recipe_name = request.form['recipe']
@@ -131,13 +124,20 @@ def edit(recipe_id):
         cursor = pymysql.cursors.DictCursor(conn)
 
         sql = """
-        UPDATE Recipe SET cuisine_id = {},
-        recipe_name = "{}", 
-        description = "{}",
-        cooking_instructions = "{}"
-        WHERE recipe_id = {}
-        """.format(cuisine_id, recipe_name, description, cooking_instructions, recipe_id)
-        cursor.execute(sql)
+        UPDATE Recipe
+        JOIN Author
+        ON Recipe.author_id = Author.author_id
+        JOIN Author_country_of_origin 
+        ON Author.author_country_of_origin_id = Author_country_of_origin.author_country_of_origin_id
+        SET Recipe.cuisine_id = {},
+        Recipe.recipe_name = "{}", 
+        Recipe.description = "{}",
+        Recipe.cooking_instructions = "{}",
+        Author.author_name = "{}",
+        Author.author_country_of_origin_id = {}
+        WHERE Recipe.recipe_id = {}
+        """.format(cuisine_id, recipe_name, description, cooking_instructions, author_name, author_country_of_origin_id, recipe_id)
+        cursor.execute(sql)   
 
         sql = """
         UPDATE Recipe_allergen SET allergen_id = {}
@@ -151,26 +151,6 @@ def edit(recipe_id):
         """.format(ingredient_id, recipe_id)
         cursor.execute(sql)   
         
-        # sql = """
-        # UPDATE Author SET author_country_of_origin_id = {},
-        # author_name = "{}", 
-        # WHERE recipe_id = {}
-        # """.format(author_country_of_origin_id, author_name, recipe_id)
-        # cursor.execute(sql)
-        
-        sql = """
-        UPDATE Author 
-        JOIN Recipe_author
-        ON Author.author_id = Recipe_author.author_id
-        JOIN Recipe
-        ON Recipe_author.recipe_id = Recipe.recipe_id
-        SET Author.author_country_of_origin_id = author_country_of_origin_id,
-        Author.author_name = author_name, 
-        WHERE Recipe.recipe_id = recipe_id
-        """
-        cursor.execute(sql)
-
-
         conn.commit()
         cursor.close();
         return redirect('/')
@@ -180,9 +160,6 @@ def delete(recipe_id):
     cursor = pymysql.cursors.DictCursor(conn)
     
     sql = "DELETE FROM Recipe_allergen WHERE recipe_id = {}".format(recipe_id)
-    cursor.execute(sql)
-    
-    sql = "DELETE FROM Recipe_author WHERE recipe_id = {}".format(recipe_id)
     cursor.execute(sql)
     
     sql = "DELETE FROM Recipe_ingredient WHERE recipe_id = {}".format(recipe_id)
