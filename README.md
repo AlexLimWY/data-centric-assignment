@@ -2,7 +2,7 @@
 This is a website for user-generated content. Specifically, users or authors can upload cooking recipes and the combination of all these uploads will form an online cookbook. In addition, the users can update or delete recipes on this website.
 
 ## Demo
-A live demo can be found [here](https://alwy-front-end-assignment.herokuapp.com/ ).
+A live demo can be found [here](https://alwy-data-centric-assignment.herokuapp.com/).
 
 ## UX
 My goal in the design was a single-page application. I wanted to present all the recipes in one page, the home page. Users who wanted to find out more about a recipe can click on the ‘Show Recipe’ button to open a modal which will show the information. This modal functions like a pop-up box which can be easily closed so that the user will not need to navigate away from the home page. The information to be presented to the user and the database relations is based on the ‘Cookbook ER Diagramme.pdf’ file in the main directory of this ‘data-centric-assignment’ Cloud9 workspace.
