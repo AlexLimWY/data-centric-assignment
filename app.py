@@ -5,7 +5,7 @@ from flask import redirect
 import os
 import pymysql
 
-conn = pymysql.connect(host='localhost', user='alexlimwy', password='', db='cookbook')
+conn = pymysql.connect(host='remotemysql.com', user='nQGMd0M7Ff', password='3hByySiho0', db='nQGMd0M7Ff', port=3306)
 
 app = Flask (__name__)
 
