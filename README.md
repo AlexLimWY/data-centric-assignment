@@ -42,7 +42,7 @@ A person who wants to run this code locally can clone or download this repositor
 - The list of allergens were taken from [Foodsafety.gov](https://www.foodsafety.gov/poisoning/causes/allergens/index.html)
 - Some author details were taken from [Malaysian Women Weekly Magazine: July 2012](https://rasamalaysia.com/celebchef0712.pdf)
 
-###Media
+### Media
 - The image for Chinese Roast Chicken was taken from [RASAMALAYISA](https://rasamalaysia.com/chinese-roast-chicken/)
 - The image for Onion Scallion Beef was taken from [RASAMALAYISA](https://rasamalaysia.com/onion-scallion-beef/)
 - The image for Braised Pork Belly in Soy Sauce (Tau Yew Bak) was taken from [RASAMALAYISA](https://rasamalaysia.com/braised-pork-belly-in-soy-sauce-tau-yew-bak/)
