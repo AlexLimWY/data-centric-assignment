@@ -7,49 +7,49 @@
 {% block maincontent %}
 <br>
     <form method='POST'>
-        <div>
+        <div class="form-group">
             <label>Recipe Name:</label>
-            <input type='text' name='recipe' value='{{recipe.recipe_name}}' required></input>
+            <input type='text' name='recipe' value='{{recipe.recipe_name}}' class="form-control" required></input>
         </div>
-        <div>
+        <div class="form-group">
             <label>Description:</label>
-            <textarea name='description' required>{{recipe.description}}</textarea>
+            <textarea name='description' class="form-control" required>{{recipe.description}}</textarea>
         </div>
-        <div>
+        <div class="form-group">
             <label>Main Ingredient:</label>
-            <select name='ingredient'>
+            <select name='ingredient' class="form-control">
                 {%for i in all_ingredients %}
                 <option value='{{i.ingredient_id}}'>{{i.ingredient_name}}</option>
                 {%endfor%}
             </select>
         </div>
-        <div>
+        <div class="form-group">
             <label>Allergen:</label>
-            <select name='allergen'>
+            <select name='allergen' class="form-control">
                 {%for a in all_allergens %}
                 <option value='{{a.allergen_id}}'>{{a.allergen_name}}</option>
                 {%endfor%}
             </select>
         </div>
-        <div>
+        <div class="form-group">
             <label>Cuisine</label>
-            <select name='cuisine'>
+            <select name='cuisine' class="form-control">
                 {%for c in all_cuisines %}
                 <option value='{{c.cuisine_id}}'>{{c.cuisine_name}}</option>
                 {%endfor%}
             </select>
         </div>
-        <div>
+        <div class="form-group">
             <label>Cooking Instructions:</label>
-            <textarea name='instructions' required>{{recipe.cooking_instructions}}</textarea>
+            <textarea name='instructions' class="form-control" required>{{recipe.cooking_instructions}}</textarea>
         </div>
-        <div>
+        <div class="form-group">
             <label>Author's Name:</label>
-            <input type='text' name='author' value='{{author.author_name}}' required></input>
+            <input type='text' name='author' value='{{author.author_name}}' class="form-control" required></input>
         </div>
-        <div>
+        <div class="form-group">
             <label>Author's Country of Origin:</label>
-            <select name='country'>
+            <select name='country' class="form-control">
                 {%for co in all_countries %}
                 <option value='{{co.author_country_of_origin_id}}'>{{co.author_country_of_origin_name}}</option>
                 {%endfor%}
